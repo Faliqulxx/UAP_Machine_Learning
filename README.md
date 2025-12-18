@@ -197,3 +197,26 @@ pip install -r requirements.txt
 ```bash
 streamlit run dashboard/app.py
 ```
+## 📁 Struktur Folder
+
+```
+cat-breed-classification/
+│
+├── dashboard/
+│   └── app.py
+│
+├── models/
+│   ├── cnn_scratch_cat_breed_final.keras
+│   ├── mobilenetv2_cat_breed_final.keras
+│   └── resnet50_cat_breed_final.keras
+│
+├── sample_images/
+│   ├── abyssinian.jpg
+│   ├── bengal.jpg
+│   └── ...
+│
+├── labels.txt
+├── requirements.txt
+└── README.md
+
+```
