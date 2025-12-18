@@ -183,17 +183,17 @@ Aplikasi web dikembangkan menggunakan **Streamlit** dengan fitur:
 ```bash
 git clone https://github.com/username/cat-breed-classification.git
 cd cat-breed-classification
-
+```
 ### 2️⃣ Buat Virtual Environment
 ```bash
 python -m venv venv
 venv\Scripts\activate
-
+```
 ### 3️⃣ Install Dependencies
 ```bash
 pip install -r requirements.txt
-
+```
 ### 4️⃣ Jalankan Aplikasi Streamlit
 ```bash
 streamlit run dashboard/app.py
-
+```
