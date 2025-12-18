@@ -1,9 +1,15 @@
 import os
 import streamlit as st
 import numpy as np
+import pandas as pd
 from PIL import Image
-from tensorflow.keras.models import load_model
+from tensorflow import keras
 import gdown
+
+# =============================
+# BASE DIR (AMAN DI CLOUD)
+# =============================
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # =============================
 # CONFIG
@@ -19,15 +25,17 @@ st.set_page_config(
 # =============================
 @st.cache_data
 def load_labels():
-    with open("labels.txt") as f:
+    label_path = os.path.join(BASE_DIR, "labels.txt")
+    with open(label_path) as f:
         return [line.strip() for line in f.readlines()]
 
 CLASS_NAMES = load_labels()
 
 # =============================
-# MODEL CONFIG (Google Drive)
+# MODEL CONFIG
 # =============================
-MODEL_DIR = "models"
+MODEL_DIR = os.path.join(BASE_DIR, "models")
+os.makedirs(MODEL_DIR, exist_ok=True)
 
 MODELS = {
     "CNN Scratch": {
@@ -44,10 +52,8 @@ MODELS = {
     }
 }
 
-os.makedirs(MODEL_DIR, exist_ok=True)
-
 # =============================
-# DOWNLOAD MODEL (IF NEEDED)
+# DOWNLOAD MODEL
 # =============================
 def download_model(model_info):
     model_path = os.path.join(MODEL_DIR, model_info["filename"])
@@ -61,11 +67,11 @@ def download_model(model_info):
     return model_path
 
 # =============================
-# LOAD MODEL (CACHED)
+# LOAD MODEL (CACHE)
 # =============================
 @st.cache_resource
 def load_model_cached(model_path):
-    return load_model(model_path)
+    return keras.models.load_model(model_path)
 
 # =============================
 # IMAGE PREPROCESS
@@ -73,7 +79,7 @@ def load_model_cached(model_path):
 def preprocess_image(image, img_size=224):
     image = image.convert("RGB")
     image = image.resize((img_size, img_size))
-    image = np.array(image) / 255.0
+    image = np.array(image, dtype=np.float32) / 255.0
     return np.expand_dims(image, axis=0)
 
 # =============================
@@ -92,15 +98,13 @@ st.sidebar.info(
     """
     **Akurasi Klasifikasi:**
     - CNN Scratch : **42%**
-    - MobileNetV2 : **82%** ⭐
+    - MobileNetV2 : **82% ⭐**
     - ResNet50    : **21%**
-
-    _Model terbaik: **MobileNetV2**_
     """
 )
 
 # =============================
-# LOAD SELECTED MODEL ONLY
+# LOAD MODEL
 # =============================
 model_info = MODELS[model_name]
 model_path = download_model(model_info)
@@ -111,28 +115,24 @@ model = load_model_cached(model_path)
 # =============================
 st.title("🐱 Klasifikasi Ras pada Kucing")
 st.markdown(
-    "Sistem klasifikasi **12 ras kucing** menggunakan **Deep Learning** "
-    "(CNN Scratch & Transfer Learning)."
+    "Sistem klasifikasi **12 ras kucing** menggunakan "
+    "**CNN Scratch & Transfer Learning**."
 )
 
 # =============================
 # GALLERY
 # =============================
-st.subheader("📸 Contoh Ras Kucing dalam Dataset")
+st.subheader("📸 Contoh Ras Kucing")
 
 cols = st.columns(4)
 for idx, breed in enumerate(CLASS_NAMES):
-    img_path = f"sample_images/{breed}.jpg"
+    img_path = os.path.join(BASE_DIR, "sample_images", f"{breed}.jpg")
     if os.path.exists(img_path):
         with cols[idx % 4]:
-            st.image(
-                img_path,
-                caption=breed.replace("_", " ").title(),
-                width=140
-            )
+            st.image(img_path, caption=breed.replace("_", " ").title(), width=140)
 
 # =============================
-# PREDICTION SECTION
+# PREDICTION
 # =============================
 st.markdown("---")
 st.subheader("🔍 Uji Model")
@@ -166,18 +166,16 @@ if uploaded_file:
         # =============================
         # PROBABILITY TABLE
         # =============================
+        prob_df = pd.DataFrame({
+            "Ras Kucing": CLASS_NAMES,
+            "Probabilitas": preds
+        }).sort_values("Probabilitas", ascending=False)
+
         st.subheader("📊 Probabilitas Semua Kelas")
-        prob_dict = {
-            CLASS_NAMES[i]: float(preds[i])
-            for i in range(len(CLASS_NAMES))
-        }
-        st.dataframe(
-            prob_dict,
-            use_container_width=True
-        )
+        st.dataframe(prob_df, use_container_width=True)
 
 # =============================
 # FOOTER
 # =============================
 st.markdown("---")
-st.caption("Faliqul Isback | Cat Breed Classification")
+st.caption("Faliqul Ishbah | Cat Breed Classification")
