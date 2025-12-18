@@ -3,6 +3,7 @@ import streamlit as st
 import numpy as np
 from PIL import Image
 from tensorflow import keras
+import gdown
 
 # =============================
 # CONFIG
@@ -24,17 +25,47 @@ def load_labels():
 CLASS_NAMES = load_labels()
 
 # =============================
-# LOAD MODELS
+# MODEL CONFIG (Google Drive)
 # =============================
-@st.cache_resource
-def load_model(model_path):
-    return keras.models.load_model(model_path)
+MODEL_DIR = "models"
 
 MODELS = {
-    "CNN Scratch": load_model("models/cnn_scratch_cat_breed_final.keras"),
-    "MobileNetV2": load_model("models/mobilenetv2_cat_breed_final.keras"),
-    "ResNet50": load_model("models/resnet50_cat_breed_final.keras"),
+    "CNN Scratch": {
+        "filename": "cnn_scratch_cat_breed_final.keras",
+        "gdrive_id": "1EePG5jNTU6w5rJdZdIcVwfEjekzPcBwV"
+    },
+    "MobileNetV2": {
+        "filename": "mobilenetv2_cat_breed_final.keras",
+        "gdrive_id": "1FG6BODBuUVNFkCodO09KPkwJmnonFOTWT"
+    },
+    "ResNet50": {
+        "filename": "resnet50_cat_breed_final.keras",
+        "gdrive_id": "1hxy8iW3R0mUWhUnU-uNeEQgd42UkGOAG"
+    }
 }
+
+os.makedirs(MODEL_DIR, exist_ok=True)
+
+# =============================
+# DOWNLOAD MODEL (IF NEEDED)
+# =============================
+def download_model(model_info):
+    model_path = os.path.join(MODEL_DIR, model_info["filename"])
+    if not os.path.exists(model_path):
+        with st.spinner(f"Mengunduh model {model_info['filename']}..."):
+            gdown.download(
+                f"https://drive.google.com/uc?id={model_info['gdrive_id']}",
+                model_path,
+                quiet=False
+            )
+    return model_path
+
+# =============================
+# LOAD MODEL (CACHED)
+# =============================
+@st.cache_resource
+def load_model_cached(model_path):
+    return keras.models.load_model(model_path, compile=False)
 
 # =============================
 # IMAGE PREPROCESS
@@ -68,8 +99,12 @@ st.sidebar.info(
     """
 )
 
-
-model = MODELS[model_name]
+# =============================
+# LOAD SELECTED MODEL ONLY
+# =============================
+model_info = MODELS[model_name]
+model_path = download_model(model_info)
+model = load_model_cached(model_path)
 
 # =============================
 # MAIN UI
