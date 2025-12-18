@@ -71,7 +71,10 @@ def download_model(model_info):
 # =============================
 @st.cache_resource
 def load_model_cached(model_path):
-    return keras.models.load_model(model_path)
+    return keras.models.load_model(
+        model_path,
+        compile=False
+    )
 
 # =============================
 # IMAGE PREPROCESS
