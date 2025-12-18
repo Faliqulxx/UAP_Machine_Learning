@@ -35,8 +35,8 @@ MODELS = {
         "gdrive_id": "1EePG5jNTU6w5rJdZdIcVwfEjekzPcBwV"
     },
     "MobileNetV2": {
-        "filename": "mobilenetv2_cat_breed_final.keras",
-        "gdrive_id": "1FG6BODBuUVNFkCodO09KPkwJmnonFOTW"
+        "filename": "mobilenetv2_cat_breed_final.h5",
+        "gdrive_id": "1aLqo0_i6XiwlWVuxl_0JMqHiakcpgbCd"
     },
     "ResNet50": {
         "filename": "resnet50_cat_breed_final.keras",
