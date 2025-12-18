@@ -36,7 +36,7 @@ MODELS = {
     },
     "MobileNetV2": {
         "filename": "mobilenetv2_cat_breed_final.keras",
-        "gdrive_id": "1FG6BODBuUVNFkCodO09KPkwJmnonFOTWT"
+        "gdrive_id": "1FG6BODBuUVNFkCodO09KPkwJmnonFOTW"
     },
     "ResNet50": {
         "filename": "resnet50_cat_breed_final.keras",
