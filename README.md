@@ -25,19 +25,64 @@ Dataset yang digunakan adalah **Oxford-IIIT Pet Dataset**, yang tersedia secara 
 - Resolusi bervariasi
 - Variasi pose, pencahayaan, dan skala
 
-Contoh ras kucing:
-- Abyssinian  
-- Bengal  
-- Birman  
-- Bombay  
-- British Shorthair  
-- Egyptian Mau  
-- Maine Coon  
-- Persian  
-- Ragdoll  
-- Russian Blue  
-- Siamese  
-- Sphynx  
+## 🐾 Contoh Ras Kucing
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="assets/cat_breeds/Abyssinian.jpg" width="150"><br>
+      <b>Abyssinian</b>
+    </td>
+    <td align="center">
+      <img src="assets/cat_breeds/Bengal.jpg" width="150"><br>
+      <b>Bengal</b>
+    </td>
+    <td align="center">
+      <img src="assets/cat_breeds/Birman.jpg" width="150"><br>
+      <b>Birman</b>
+    </td>
+    <td align="center">
+      <img src="assets/cat_breeds/Bombay.jpg" width="150"><br>
+      <b>Bombay</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="assets/cat_breeds/British_Shorthair.jpg" width="150"><br>
+      <b>British Shorthair</b>
+    </td>
+    <td align="center">
+      <img src="assets/cat_breeds/Egyptian_Mau.jpg" width="150"><br>
+      <b>Egyptian Mau</b>
+    </td>
+    <td align="center">
+      <img src="assets/cat_breeds/Maine_Coon.jpg" width="150"><br>
+      <b>Maine Coon</b>
+    </td>
+    <td align="center">
+      <img src="assets/cat_breeds/Persian.jpg" width="150"><br>
+      <b>Persian</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="assets/cat_breeds/Ragdoll.jpg" width="150"><br>
+      <b>Ragdoll</b>
+    </td>
+    <td align="center">
+      <img src="assets/cat_breeds/Russian_Blue.jpg" width="150"><br>
+      <b>Russian Blue</b>
+    </td>
+    <td align="center">
+      <img src="assets/cat_breeds/Siamese.jpg" width="150"><br>
+      <b>Siamese</b>
+    </td>
+    <td align="center">
+      <img src="assets/cat_breeds/Sphynx.jpg" width="150"><br>
+      <b>Sphynx</b>
+    </td>
+  </tr>
+</table>
 
 ### Jumlah Data
 Dataset diperluas menggunakan **augmentasi data** untuk memenuhi ketentuan minimal:
@@ -66,32 +111,36 @@ Preprocessing bertujuan untuk meningkatkan kemampuan generalisasi model dan meng
 ## 🧠 Model yang Digunakan
 
 ### 1️⃣ CNN Scratch (Baseline)
-Model Convolutional Neural Network yang dibangun **dari awal tanpa pretrained weights**.
+Model Convolutional Neural Network yang dibangun dari awal tanpa pretrained weights dan digunakan sebagai pembanding dasar**.
 
 **Karakteristik:**
 - Digunakan sebagai baseline
 - Arsitektur sederhana
-- Rentan overfitting pada dataset kompleks
+- Mengalami overfitting, karena keterbatasan data dan tidak adanya pengetahuan awal (pretrained features)
 
 ---
 
 ### 2️⃣ MobileNetV2 (Transfer Learning)
-Model pretrained MobileNetV2 dengan pendekatan transfer learning.
+Model MobileNetV2 pretrained yang diadaptasi menggunakan pendekatan transfer learning.
 
 **Keunggulan:**
 - Ringan dan efisien
 - Waktu training lebih cepat
-- Cocok untuk deployment
+- Model paling stabil dan optimal pada eksperimen
 
 ---
 
 ### 3️⃣ ResNet50 (Transfer Learning)
-Model deep residual network dengan 50 layer.
+Model deep residual network dengan 50 layer yang dirancang untuk ekstraksi fitur kompleks.
 
 **Keunggulan:**
-- Mampu mengekstraksi fitur kompleks
-- Performa paling stabil
-- Akurasi tertinggi dibanding model lain
+- Arsitektur sangat dalam dan kompleks
+- Secara teori mampu mengekstraksi fitur tingkat tinggi
+- Namun pada eksperimen ini menghasilkan akurasi sangat rendah (21%)
+- Diduga disebabkan oleh:
+-- Kompleksitas model yang tidak sebanding dengan ukuran dataset
+-- Fine-tuning yang belum optimal
+-- Model gagal melakukan generalisasi dan cenderung overfitting
 
 ---
 
@@ -105,15 +154,16 @@ Evaluasi dilakukan menggunakan data testing dengan metrik:
 - Confusion Matrix
 - Grafik Loss dan Accuracy
 
-### Ringkasan Hasil
+### 📊 Ringkasan Hasil
+
 | Model | Accuracy | Analisis |
 |------|----------|----------|
-| CNN Scratch | ±42% | Baseline, overfitting |
-| MobileNetV2 | Lebih tinggi | Stabil dan efisien |
-| ResNet50 | Tertinggi | Fitur paling representatif |
+| CNN Scratch | 42% | Baseline, mengalami overfitting |
+| MobileNetV2 | 82% | Performa terbaik dan stabil |
+| ResNet50 | 21% | Model terlalu kompleks, fine-tuning kurang optimal |
 
 **Kesimpulan:**  
-Model dengan pendekatan **transfer learning** memberikan peningkatan performa yang signifikan dibandingkan CNN yang dilatih dari awal.
+Model dengan pendekatan **MobileNetV2** memberikan peningkatan performa yang signifikan dibandingkan CNN yang dilatih dari awal.
 
 ---
 
@@ -133,3 +183,40 @@ Aplikasi web dikembangkan menggunakan **Streamlit** dengan fitur:
 ```bash
 git clone https://github.com/username/cat-breed-classification.git
 cd cat-breed-classification
+```
+### 2️⃣ Buat Virtual Environment
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+### 3️⃣ Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+### 4️⃣ Jalankan Aplikasi Streamlit
+```bash
+streamlit run dashboard/app.py
+```
+## 📁 Struktur Folder
+
+```
+cat-breed-classification/
+│
+├── dashboard/
+│   └── app.py
+│
+├── models/
+│   ├── cnn_scratch_cat_breed_final.keras
+│   ├── mobilenetv2_cat_breed_final.keras
+│   └── resnet50_cat_breed_final.keras
+│
+├── sample_images/
+│   ├── abyssinian.jpg
+│   ├── bengal.jpg
+│   └── ...
+│
+├── labels.txt
+├── requirements.txt
+└── README.md
+
+```
