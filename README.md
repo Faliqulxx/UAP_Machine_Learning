@@ -1,4 +1,4 @@
-# 🐱 Cat Breed Classification using Deep Learning
+# 🐱 Cat Breed Classification
 
 ## 📌 Deskripsi Proyek
 Proyek ini bertujuan untuk membangun sistem **klasifikasi ras kucing** berbasis **Deep Learning** menggunakan data citra.  
