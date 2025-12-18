@@ -2,7 +2,7 @@ import os
 import streamlit as st
 import numpy as np
 from PIL import Image
-from tensorflow import keras
+from tensorflow.keras.models import load_model
 import gdown
 
 # =============================
@@ -65,7 +65,7 @@ def download_model(model_info):
 # =============================
 @st.cache_resource
 def load_model_cached(model_path):
-    return keras.models.load_model(model_path, compile=False)
+    return load_model(model_path, compile=False)
 
 # =============================
 # IMAGE PREPROCESS
