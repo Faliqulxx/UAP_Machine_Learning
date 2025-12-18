@@ -111,32 +111,36 @@ Preprocessing bertujuan untuk meningkatkan kemampuan generalisasi model dan meng
 ## 🧠 Model yang Digunakan
 
 ### 1️⃣ CNN Scratch (Baseline)
-Model Convolutional Neural Network yang dibangun **dari awal tanpa pretrained weights**.
+Model Convolutional Neural Network yang dibangun dari awal tanpa pretrained weights dan digunakan sebagai pembanding dasar**.
 
 **Karakteristik:**
 - Digunakan sebagai baseline
 - Arsitektur sederhana
-- Rentan overfitting pada dataset kompleks
+- Mengalami overfitting, karena keterbatasan data dan tidak adanya pengetahuan awal (pretrained features)
 
 ---
 
 ### 2️⃣ MobileNetV2 (Transfer Learning)
-Model pretrained MobileNetV2 dengan pendekatan transfer learning.
+Model MobileNetV2 pretrained yang diadaptasi menggunakan pendekatan transfer learning.
 
 **Keunggulan:**
 - Ringan dan efisien
 - Waktu training lebih cepat
-- Cocok untuk deployment
+- Model paling stabil dan optimal pada eksperimen
 
 ---
 
 ### 3️⃣ ResNet50 (Transfer Learning)
-Model deep residual network dengan 50 layer.
+Model deep residual network dengan 50 layer yang dirancang untuk ekstraksi fitur kompleks.
 
 **Keunggulan:**
-- Mampu mengekstraksi fitur kompleks
-- Performa paling stabil
-- Akurasi tertinggi dibanding model lain
+- Arsitektur sangat dalam dan kompleks
+- Secara teori mampu mengekstraksi fitur tingkat tinggi
+- Namun pada eksperimen ini menghasilkan akurasi sangat rendah (21%)
+- Diduga disebabkan oleh:
+-- Kompleksitas model yang tidak sebanding dengan ukuran dataset
+-- Fine-tuning yang belum optimal
+-- Model gagal melakukan generalisasi dan cenderung overfitting
 
 ---
 
@@ -150,15 +154,16 @@ Evaluasi dilakukan menggunakan data testing dengan metrik:
 - Confusion Matrix
 - Grafik Loss dan Accuracy
 
-### Ringkasan Hasil
+### 📊 Ringkasan Hasil
+
 | Model | Accuracy | Analisis |
 |------|----------|----------|
-| CNN Scratch | ±42% | Baseline, overfitting |
-| MobileNetV2 | Lebih tinggi | Stabil dan efisien |
-| ResNet50 | Tertinggi | Fitur paling representatif |
+| CNN Scratch | 42% | Baseline, mengalami overfitting |
+| MobileNetV2 | 82% | Performa terbaik dan stabil |
+| ResNet50 | 21% | Model terlalu kompleks, fine-tuning kurang optimal |
 
 **Kesimpulan:**  
-Model dengan pendekatan **transfer learning** memberikan peningkatan performa yang signifikan dibandingkan CNN yang dilatih dari awal.
+Model dengan pendekatan **MobileNetV2** memberikan peningkatan performa yang signifikan dibandingkan CNN yang dilatih dari awal.
 
 ---
 
