@@ -65,7 +65,7 @@ def download_model(model_info):
 # =============================
 @st.cache_resource
 def load_model_cached(model_path):
-    return load_model(model_path, compile=False)
+    return load_model(model_path)
 
 # =============================
 # IMAGE PREPROCESS
