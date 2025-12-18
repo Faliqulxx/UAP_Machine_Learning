@@ -30,55 +30,55 @@ Dataset yang digunakan adalah **Oxford-IIIT Pet Dataset**, yang tersedia secara 
 <table>
   <tr>
     <td align="center">
-      <img src="assets/cat_breeds/abyssinian.jpg" width="150"><br>
+      <img src="assets/cat_breeds/Abyssinian.jpg" width="150"><br>
       <b>Abyssinian</b>
     </td>
     <td align="center">
-      <img src="assets/cat_breeds/bengal.jpg" width="150"><br>
+      <img src="assets/cat_breeds/Bengal.jpg" width="150"><br>
       <b>Bengal</b>
     </td>
     <td align="center">
-      <img src="assets/cat_breeds/birman.jpg" width="150"><br>
+      <img src="assets/cat_breeds/Birman.jpg" width="150"><br>
       <b>Birman</b>
     </td>
     <td align="center">
-      <img src="assets/cat_breeds/bombay.jpg" width="150"><br>
+      <img src="assets/cat_breeds/Bombay.jpg" width="150"><br>
       <b>Bombay</b>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="assets/cat_breeds/british_shorthair.jpg" width="150"><br>
+      <img src="assets/cat_breeds/British_Shorthair.jpg" width="150"><br>
       <b>British Shorthair</b>
     </td>
     <td align="center">
-      <img src="assets/cat_breeds/egyptian_mau.jpg" width="150"><br>
+      <img src="assets/cat_breeds/Egyptian_Mau.jpg" width="150"><br>
       <b>Egyptian Mau</b>
     </td>
     <td align="center">
-      <img src="assets/cat_breeds/maine_coon.jpg" width="150"><br>
+      <img src="assets/cat_breeds/Maine_Coon.jpg" width="150"><br>
       <b>Maine Coon</b>
     </td>
     <td align="center">
-      <img src="assets/cat_breeds/persian.jpg" width="150"><br>
+      <img src="assets/cat_breeds/Persian.jpg" width="150"><br>
       <b>Persian</b>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="assets/cat_breeds/ragdoll.jpg" width="150"><br>
+      <img src="assets/cat_breeds/Ragdoll.jpg" width="150"><br>
       <b>Ragdoll</b>
     </td>
     <td align="center">
-      <img src="assets/cat_breeds/russian_blue.jpg" width="150"><br>
+      <img src="assets/cat_breeds/Russian_Blue.jpg" width="150"><br>
       <b>Russian Blue</b>
     </td>
     <td align="center">
-      <img src="assets/cat_breeds/siamese.jpg" width="150"><br>
+      <img src="assets/cat_breeds/Siamese.jpg" width="150"><br>
       <b>Siamese</b>
     </td>
     <td align="center">
-      <img src="assets/cat_breeds/sphynx.jpg" width="150"><br>
+      <img src="assets/cat_breeds/Sphynx.jpg" width="150"><br>
       <b>Sphynx</b>
     </td>
   </tr>
