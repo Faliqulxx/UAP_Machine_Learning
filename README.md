@@ -166,6 +166,57 @@ Evaluasi dilakukan menggunakan data testing dengan metrik:
 Model dengan pendekatan **MobileNetV2** memberikan peningkatan performa yang signifikan dibandingkan CNN yang dilatih dari awal.
 
 ---
+### 📈 Visualisasi Performa Model
+
+Untuk memperkuat analisis hasil klasifikasi, dilakukan visualisasi performa masing-masing model menggunakan **plot accuracy–loss** serta **confusion matrix**. Visualisasi ini bertujuan untuk memberikan gambaran perilaku pelatihan model serta kemampuan klasifikasi pada data uji.
+
+---
+
+#### 1️⃣ CNN Scratch
+
+**Plot Accuracy & Loss**  
+Grafik menunjukkan perbedaan yang cukup signifikan antara nilai accuracy dan loss pada data training dan validation. Hal ini mengindikasikan bahwa model CNN Scratch mengalami **overfitting**, di mana model mampu mempelajari data training dengan baik namun kurang mampu melakukan generalisasi pada data baru.
+
+**Confusion Matrix**  
+Confusion matrix menunjukkan bahwa model masih sering melakukan kesalahan klasifikasi antar kelas. Prediksi tidak dominan pada diagonal utama, yang menandakan kemampuan ekstraksi fitur masih terbatas.
+
+> <img src="assets/cnnP.png" width="150"><br> 
+> **Gambar Y.** Confusion Matrix CNN Scratch
+
+---
+
+#### 2️⃣ MobileNetV2
+
+**Plot Accuracy & Loss**  
+Kurva training dan validation pada MobileNetV2 terlihat relatif stabil dan saling mendekati. Hal ini menunjukkan bahwa model memiliki kemampuan **generalization** yang baik serta proses pelatihan yang lebih optimal dibandingkan model lainnya.
+
+**Confusion Matrix**  
+Sebagian besar hasil prediksi berada pada diagonal utama confusion matrix, yang menandakan tingkat akurasi klasifikasi yang tinggi dan konsisten pada setiap kelas.
+
+> **Gambar X.** Plot Accuracy & Loss MobileNetV2  
+> **Gambar Y.** Confusion Matrix MobileNetV2
+
+---
+
+#### 3️⃣ ResNet50
+
+**Plot Accuracy & Loss**  
+Grafik menunjukkan nilai accuracy yang rendah baik pada data training maupun validation. Hal ini mengindikasikan bahwa proses **fine-tuning ResNet50 belum optimal**, serta kompleksitas model tidak sebanding dengan jumlah dan karakteristik data yang digunakan.
+
+**Confusion Matrix**  
+Confusion matrix memperlihatkan distribusi prediksi yang kurang merata pada diagonal utama. Model sering salah dalam membedakan kelas, sehingga performa keseluruhan menjadi rendah.
+
+> **Gambar X.** Plot Accuracy & Loss ResNet50  
+> **Gambar Y.** Confusion Matrix ResNet50
+
+---
+
+### 🧠 Pembahasan Visualisasi
+
+Berdasarkan hasil visualisasi plot dan confusion matrix, dapat disimpulkan bahwa **MobileNetV2** memberikan performa terbaik dan paling stabil. Model ini mampu menyeimbangkan kompleksitas arsitektur dengan kemampuan generalisasi data.  
+Sebaliknya, CNN Scratch mengalami overfitting, sedangkan ResNet50 menunjukkan performa yang rendah akibat kompleksitas model yang terlalu tinggi dan proses fine-tuning yang kurang optimal.
+
+---
 
 ## 🌐 Dashboard Website
 Aplikasi web dikembangkan menggunakan **Streamlit** dengan fitur:
